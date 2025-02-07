@@ -33,16 +33,22 @@ def get_report(path, word_count, char_dict):
     line_break = '\n'
     count_report = str(word_count) + " words found in the document"
     char_dict_list = []
-    char_temp = {}
     for c in char_dict:
-        if c.isalpha():
+        char_temp = {}
+        if (c in char_dict_list) == False:
             char_temp["char"] = c
             char_temp["num"] = char_dict[c]
-            char_dict_list.append(char_temp)
-        print(char_dict_list)
+            if c.isalpha():
+                char_dict_list.append(char_temp)
+    char_dict_list.sort(reverse=True, key=sort_on)
     report = beginning_string + line_break + count_report + line_break + line_break
-
-    report = report + end_string
+    string = ""
+    for d in range(0, len(char_dict_list)):
+        dict_temp = char_dict_list[d]
+        letter = dict_temp["char"]
+        number = str(dict_temp["num"])
+        string = string + "The '" + letter + "' character was found " + number + " times" + line_break
+    report = report + string + end_string
     return report
 
 
