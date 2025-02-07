@@ -24,13 +24,24 @@ def countcharacters(text):
             contents_dictionary[c] = 1
     return contents_dictionary
 
+def sort_on(dict):
+    return dict["num"]
+
 def get_report(path, word_count, char_dict):
     beginning_string = "--- Begin report of " + path + " ---"
     end_string = "--- End report ---"
     line_break = '\n'
     count_report = str(word_count) + " words found in the document"
-    report = beginning_string + line_break + count_report + line_break
-    
+    char_dict_list = []
+    char_temp = {}
+    for c in char_dict:
+        if c.isalpha():
+            char_temp["char"] = c
+            char_temp["num"] = char_dict[c]
+            char_dict_list.append(char_temp)
+        print(char_dict_list)
+    report = beginning_string + line_break + count_report + line_break + line_break
+
     report = report + end_string
     return report
 
